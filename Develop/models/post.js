@@ -1,5 +1,9 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/connection'); // Your Sequelize connection
+const sequelize = require('../config/connection'); //
+
+const { User } = require('../models');
+const { Comment } = require('../models');
+
 
 const Post = sequelize.define('Post', {
   title: {
@@ -29,4 +33,4 @@ const Post = sequelize.define('Post', {
 
 });
 
-module.exports = Post
+module.exports = Post;

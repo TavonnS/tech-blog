@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/connection'); // Your Sequelize connection
+const sequelize = require('../config/connection'); 
+
 
 const User = sequelize.define('User', {
   // Define model attributes
@@ -23,4 +24,4 @@ const User = sequelize.define('User', {
   // You can add more fields like 'name', 'bio', 'profilePicture', etc.
 });
 
-module.exports = {User};
+module.exports = User;
