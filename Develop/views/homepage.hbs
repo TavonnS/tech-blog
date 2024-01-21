@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+</head>
+<body>
+
+<!-- Navigation Links -->
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+    </ul>
+</nav>
+
+<!-- Log In/Log Out Button -->
+{{#if userAuthenticated}}
+    <button onclick="logout()">Log Out</button>
+{{else}}
+    <button onclick="login()">Log In</button>
+{{/if}}
+
+<!-- Blog Posts -->
+{{#if blogPosts.length}}
+    <h2>Latest Blog Posts</h2>
+    <ul>
+        {{#each blogPosts}}
+            <li>
+                <h3>{{title}}</h3>
+                <p>{{content}}</p>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>No blog posts available.</p>
+{{/if}}
+
+</body>
+</html>
