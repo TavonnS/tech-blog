@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{My Tech Blog}}</title>
-    <!-- Add your stylesheets and other head elements here -->
+    <title>My Tech Blog</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
 <!-- Header with navigation -->
 <header>
+    <h1>My Tech Blog</h1>
+
     <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-        </ul>
-        {{#if isLoggedIn}}
-            <a href="/logout">Logout</a>
-        {{else}}
-            <a href="/login">Login</a>
-        {{/if}}
-    </nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li>
+            {{#if userAuthenticated}}
+                <a href="/logout">Logout</a>
+            {{else}}
+                <a href="/login">Login</a>
+            {{/if}}
+        </li>
+    </ul>
+</nav>
+
 </header>
 
 <!-- Main content -->
@@ -28,7 +33,6 @@
     {{{body}}}
 </main>
 
-<!-- Footer and additional content go here -->
 
 </body>
 </html>

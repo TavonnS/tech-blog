@@ -1,9 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/connection'); //
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-const { User } = require('../models');
-const { Comment } = require('../models');
-
+const User = require('../models/User');
 
 const Post = sequelize.define('Post', {
   title: {
@@ -16,21 +14,17 @@ const Post = sequelize.define('Post', {
   dateCreated: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW,
+    defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
   },
   author: {
     type: DataTypes.STRING,
     allowNull: false,
-    reference: {
-      model: 'User',
+    references: {
+      model: User,
       key: 'username',
     },
   },
   // Add more fields as needed
-
-
-
-
 });
 
 module.exports = Post;

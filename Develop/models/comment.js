@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const User = require('./User');
+const Post = require('./Post');
 
 const Comment = sequelize.define('Comment', {
   text: {
@@ -12,8 +12,8 @@ const Comment = sequelize.define('Comment', {
     type: DataTypes.STRING,
     allowNull: false,
     references: {
-      model: User,
-      key: 'username',
+      model: Post,
+      key: 'author',
     },
   },
 });
