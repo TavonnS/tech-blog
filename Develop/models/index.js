@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 
 const User = require('./User');
 const Post = require('./Post');
-const Comment = require('./Comment');
+const Comment = require('./comment');
 
 Post.belongsTo(User, {
     foreignKey: 'author',

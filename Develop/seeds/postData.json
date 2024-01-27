@@ -1,20 +1,17 @@
 [
-    {
-      "title": "First Post",
-      "content": "This is the content of the first post.",
-      "dateCreated": "2024-01-20T12:00:00Z",
-      "author": "user1"
-    },
-    {
-      "title": "Second Post",
-      "content": "This is the content of the second post.",
-      "dateCreated": "2024-01-21T10:30:00Z",
-      "author": "user2"
-    },
-    {
-      "title": "Third Post",
-      "content": "This is the content of the third post.",
-      "dateCreated": "2024-01-22T15:45:00Z",
-      "author": "user3"
-    }
-] 
+  {
+    "title": "First Post",
+    "content": "This is the content of the first post.",
+    "author": "1"
+  },
+  {
+    "title": "Second Post",
+    "content": "This is the content of the second post.",
+    "author": "2"
+  },
+  {
+    "title": "Third Post",
+    "content": "This is the content of the third post.",
+    "author": "3"
+  }
+]

@@ -1,14 +1,17 @@
 [
-    {
-      "text": "Great post! I really enjoyed reading it.",
-      "author": "user1"
-    },
-    {
-      "text": "Interesting insights. Looking forward to more!",
-      "author": "user2"
-    },
-    {
-      "text": "Well written. Thanks for sharing!",
-      "author": "user3"
-    }
+  {
+    "text": "Great post! I really enjoyed reading it.",
+    "author": "user1",
+    "postId": 1
+  },
+  {
+    "text": "Interesting insights. Looking forward to more!",
+    "author": "user2",
+    "postId": 2
+  },
+  {
+    "text": "Well written. Thanks for sharing!",
+    "author": "user3",
+    "postId": 3
+  }
 ]
