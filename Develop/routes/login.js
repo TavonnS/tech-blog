@@ -19,11 +19,10 @@ router.post('/login', async (req, res) => {
         req.session.user_id = userData.id;
         req.session.logged_in = true;
 
-        console.log('Before req.session.save()');
 
         // Wait for req.session.save() to complete before responding
         req.session.save(() => {
-            console.log('After req.session.save()');
+            console.log('Logged in');
             return res.redirect('/dashboard');
         });
     } catch (err) {

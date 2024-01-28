@@ -11,13 +11,15 @@
 <!-- Header with navigation -->
 <header>
     <h1>My Tech Blog</h1>
-
+    {{#if logged_in}}
+        <p>Welcome, {{user_id}}</p>
+    {{/if}}
     <nav>
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
         <li>
-            {{#if userAuthenticated}}
+            {{#if logged_in}}
                 <a href="/logout">Logout</a>
             {{else}}
                 <a href="/login">Login</a>
