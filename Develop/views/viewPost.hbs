@@ -1,8 +1,18 @@
 <main>
     <article>
-        <p>Creator: {{post.creatorUsername}}</p>
-        <p>Date Created: {{post.createdAt}}</p>
+        {{#if logged_in}}
+            {{#if isCreator}}
+                <a href="/posts/delete/{{post.id}}">Delete Post</a>
+            {{/if}}
+            {{#if isCreator}}
+                <a href="/posts/edit/{{post.id}}">Edit Post</a>
+            {{/if}}
+        {{/if}}
+        <h1>{{post.title}}</h1>
         <p>{{{post.contents}}}</p>
+        <p>Creator: {{post.username}}</p>
+        <p>Date Created: {{post.dateCreated}}</p>
+        
     </article>
 
     <!-- Comment form -->

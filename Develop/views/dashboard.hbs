@@ -4,24 +4,30 @@
         <ul>
             {{#each posts}}
                 <li>
-                <a href="/posts/{{id}}">{{title}}</a>
-
-                <h3>{{dataValues.author}}</h3>
-                <h3>{{dataValues.title}}</h3>
-                <p>{{dataValues.content}}</p>
+                    <a href="/posts/{{id}}">{{title}}</a>
+                    <h3>{{dataValues.author}}</h3>
+                    <h3>{{dataValues.title}}</h3>
+                    <p>{{dataValues.content}}</p>
                 </li>
             {{/each}}
         </ul>
     {{else}}
         <p>No blog posts available, but you are logged in.</p>
     {{/if}}
-    <h2>
-        <a href="/posts/new">Create a New Blog Post</a>
-    </h2>
 
+    <h2>Create a New Blog Post</h2>
+    <form action="/posts/new" method="POST">
+        <!-- Add form fields as needed -->
+        <label for="postTitle">Title:</label>
+        <input type="text" id="postTitle" name="postTitle" required>
 
+        <label for="postContent">Content:</label>
+        <textarea id="postContent" name="postContent" required></textarea>
 
+        <!-- Add more form fields as needed -->
 
+        <button type="submit">Submit</button>
+    </form>
 
 {{else}}
     <p>You are not logged in!</p>
