@@ -1,24 +1,18 @@
-{{#if blogPosts.length}}
-    <h2>Latest Blog Posts</h2>
-    <ul>
-        {{#each blogPosts}}
-            <li>
-                <h3>{{title}}</h3>
-                <p>{{content}}</p>
-            </li>
-        {{/each}}
-    </ul>
+{{#if logged_in}}
+    {{#if posts.length}}
+        <h2>Latest Blog Posts</h2>
+        <ul>
+            {{#each posts}}
+                <li>
+                    <h2>{{author}}</h2>
+                    <h3>{{title}}</h3>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No blog posts available, but you are logged in.</p>
+    {{/if}}
 {{else}}
-    <p>No blog posts available.</p>
+    <p>You are not logged in!</p>
 {{/if}}
-
-<!-- Create a new post -->
-<div>
-    <form action="POST">
-        <label for="title">Post Title</label>
-        <input type="text" id="title" name="title">
-        <label for="content">Post Content</label>
-        <textarea id="content" name="content"></textarea>
-        <button type="submit">Create Post</button>
-    </form>
-</div>

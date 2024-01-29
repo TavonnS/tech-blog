@@ -12,23 +12,23 @@
 <header>
     <h1>My Tech Blog</h1>
     {{#if logged_in}}
-        <p>Welcome, {{user_id}}</p>
+        <p>Welcome, {{username}}</p>
     {{/if}}
     <nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li>
-            {{#if logged_in}}
-                <a href="/logout">Logout</a>
-            {{else}}
-                <a href="/login">Login</a>
-            {{/if}}
-        </li>
-    </ul>
-</nav>
-
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li>
+                {{#if logged_in}}
+                    <a href="/logout">Logout</a>
+                {{else}}
+                    <a href="/login">Login</a>
+                {{/if}}
+            </li>
+        </ul>
+    </nav>
 </header>
+
 
 <!-- Main content -->
 <main>
