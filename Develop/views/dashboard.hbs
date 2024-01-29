@@ -4,15 +4,25 @@
         <ul>
             {{#each posts}}
                 <li>
-                    <h2>{{author}}</h2>
-                    <h3>{{title}}</h3>
-                    <p>{{content}}</p>
+                <a href="/posts/{{id}}">{{title}}</a>
+
+                <h3>{{dataValues.author}}</h3>
+                <h3>{{dataValues.title}}</h3>
+                <p>{{dataValues.content}}</p>
                 </li>
             {{/each}}
         </ul>
     {{else}}
         <p>No blog posts available, but you are logged in.</p>
     {{/if}}
+    <h2>
+        <a href="/posts/new">Create a New Blog Post</a>
+    </h2>
+
+
+
+
+
 {{else}}
     <p>You are not logged in!</p>
 {{/if}}

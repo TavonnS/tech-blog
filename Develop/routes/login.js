@@ -1,33 +1,46 @@
 // also logout, signup
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
 const { User } = require('../models');
 
 
 // Login route
 router.post('/login', async (req, res) => {
-    
+ 
+    try {
         const userData = await User.findOne({
-            where: { username: req.body.username, password: req.body.password }
+          where: { username: req.body.username, password: req.body.password }
         });
 
         if (!userData) {
             return res.status(400).json({ message: 'Incorrect username or password, please try again' });
-        } else { 
+        }
+
+        // Compare the entered password with the hashed password in the database
+        const validPassword = await bcrypt.compare(req.body.password, userData.password);
+
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Incorrect username or password, please try again' });
+        }
 
         req.session.user_id = userData.id;
         req.session.username = userData.username;
-        req.session.logged_in = true;  // changed logged_in to loggedIn
+        req.session.logged_in = true;
 
-
-        // Wait for req.session.save() to complete before responding
-        req.session.save(() => {
       
-            res.redirect('/dashboard');
-        }
-        ); // end of req.session.save()
-      } // end of else
-    });
+        // Wait for req.session.save() to complete before responding
+        
+        req.session.save(() => {
+        
+          res.redirect('/dashboard');
+        
+          });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 
 // Logout route
@@ -42,17 +55,30 @@ router.post('/logout', (req, res) => {
   });
 
 
-// Signup route
+  // Signup route
 router.post('/signup', async (req, res) => {
-    try {
-        const userData = await User.create(req.body);
-        req.session.user_id = userData.id;
-        req.session.username = userData.username;
-        req.session.logged_in = true; 
-        res.status(200).json(userData);
-    } catch (err) {
-        res.status(400).json(err);
-    }
+  try {
+      // Hash the password before saving it to the database
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+      // Create a new user with the hashed password
+      const userData = await User.create({
+          username: req.body.username,
+          password: hashedPassword,
+      });
+
+      req.session.user_id = userData.id;
+      req.session.username = userData.username;
+      req.session.logged_in = true; 
+      
+      // Save the session
+      req.session.save(() => {
+          res.redirect('/dashboard');
+      });
+
+  } catch (err) {
+      console.error(err);
+  }
 });
 
 module.exports = router;

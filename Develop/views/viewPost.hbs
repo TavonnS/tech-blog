@@ -1,0 +1,16 @@
+<main>
+    <article>
+        <p>Creator: {{post.creatorUsername}}</p>
+        <p>Date Created: {{post.createdAt}}</p>
+        <p>{{{post.contents}}}</p>
+    </article>
+
+    <!-- Comment form -->
+    {{#if loggedIn}}
+        <form action="/comments" method="post">
+            <input type="hidden" name="postId" value="{{post.id}}">
+            <textarea name="commentText" placeholder="Leave a comment"></textarea>
+            <button type="submit">Submit Comment</button>
+        </form>
+    {{/if}}
+</main>

@@ -1,18 +1,26 @@
-{{#if logged_in}}
     {{#if posts.length}}
-        <h2>Latest Blog Posts</h2>
+        <h2>All Blog Posts for this Forum</h2>
+
+        {{#if logged_in}}
         <ul>
             {{#each posts}}
                 <li>
-                    <h2>{{author}}</h2>
+                    <a href="/posts/{{id}}">{{title}}</a>
                     <h3>{{title}}</h3>
-                    <p>{{content}}</p>
+                    <p>{{dateCreated}}</p>
                 </li>
             {{/each}}
         </ul>
+        {{else}}
+         <ul>
+            {{#each posts}}
+                <li>
+                    <h3>{{title}}</h3>
+                    <p>{{dateCreated}}</p>
+                </li>
+            {{/each}}
+        </ul>
+        {{/if}}
     {{else}}
-        <p>No blog posts available, but you are logged in.</p>
+        <p>No blog posts available here!</p>
     {{/if}}
-{{else}}
-    <p>You are not logged in!</p>
-{{/if}}

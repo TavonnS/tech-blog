@@ -71,6 +71,7 @@ router.get('/login', (req, res) => {
             logged_in: req.session.logged_in, // Assuming req.session.logged_in is correctly set elsewhere
             user: user, // Explicitly passing user
             posts: posts, // Explicitly passing posts
+            username: req.session.username || req.body.username
         });
     } catch (err) {
         console.error('Error:', err);
@@ -78,65 +79,26 @@ router.get('/login', (req, res) => {
     }
 });
 
+// Example route for viewing a blog post
+router.get("/posts/:postId", isAuthenticated, async (req, res) => {
+  try {
+      const postId = req.params.postId;
+      // Fetch the blog post details from the database based on the postId
 
+      // For example, assuming you have a Post model
+      const post = await Post.findByPk(postId);
 
-
-
-
-
-// router.get('/dashboard', isAuthenticated, async (req, res) => {
-//     try {
-//       // Find the logged in user based on the session ID
-//       const userData = await User.findByPk(req.session.user_id, {
-//         attributes: { exclude: ['password'] },
-       
-//       });
-  
-//       const user = userData.get({ plain: true });
-//       // now get the posts belonging to the user
-//       const posts = await Post.findAll({
-//         where: {
-//           author: req.session.user_id  // note username 
-//         },
-//         include: [
-//           {
-//             model: User,
-//             attributes: ['username'],
-//           },
-//         ],
-//       });
-
-//       // pass the posts to the template
-//       res.render('dashboard', {
-//         logged_in: req.session.logged_in,
-//         ...user,
-//         posts,
-//         logged_in: true
-//       });
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-//   });
-
-
-// router.get('/dashboard', isAuthenticated, async (req, res) => {
-//     try {
-//       // Find the logged in user based on the session ID
-//       const userData = await User.findByPk(req.session.user_id, {
-//         attributes: { exclude: ['password'] },
-       
-//       });
-  
-//       const user = userData.get({ plain: true });
-  
-//       res.render('dashboard', {
-//         ...user,
-//         logged_in: true
-//       });
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-//   });
+      // Render a view with post details
+      res.render('viewPost', {
+          post,
+          loggedIn: req.session.loggedIn,
+          username: req.session.username
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+  }
+});
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
