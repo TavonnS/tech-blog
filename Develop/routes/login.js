@@ -1,4 +1,4 @@
-// also logout, signup
+// login, logout, and signup routes
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
         // Wait for req.session.save() to complete before responding
         
         req.session.save(() => {
-        
+          req.session.username = userData.username;  // added this line
           res.redirect('/dashboard');
         
           });

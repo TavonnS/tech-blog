@@ -27,11 +27,11 @@ Post.init(
       defaultValue: DataTypes.NOW,
     },
     author: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'User', // Assuming 'User' is the name of your User model
-        key: 'id', // Assuming 'id' is the primary key in the User model
+        key: 'username', // Assuming 'id' is the primary key in the User model        
       },
     },
   },

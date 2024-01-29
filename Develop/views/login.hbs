@@ -1,22 +1,25 @@
 
             <h2>LOGIN</h2>
-            <form action="/login" method="post">
-                <label for="username">Username:</label>
-                <input type="username" id="username" name="username" required>
-                
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                
-                <button type="submit">LOGIN</button>
-            </form>
-            <h2>Sign Up</h2>
-            <form action="/signup" method="post">
+            <form id="login" action="/login" method="post">
 
-                <label for="username">Username:</label>
-                <input type="username" id="username" name="username" required>
+                <label for="loginUsername">Username:</label>
+                <input type="username" id="loginUsername" name="loginUsername" required>
                 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPW" required>
                 
-                <button type="submit">Sign Up</button>
+                <button id="logbtn" type="submit">LOGIN</button>
             </form>
+
+            <h2>SIGN UP</h2>
+            <form id="signup" action="/signup" method="post">
+
+                <label for="signupUsername">Username:</label>
+                <input type="username" id="signupUsername" name="signupUsername" required>
+                
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" name="signupPW" required>
+                
+                <button id="signupbtn" type="submit">SIGN UP</button>
+            </form>
+

@@ -1,18 +1,19 @@
 [
     {
       "username": "user1",
-      "email": "user1@example.com",
       "password": "alpha"
     },
     {
       "username": "user2",
-      "email": "user2@example.com",
       "password": "beta"
     },
     {
       "username": "user3",
-      "email": "user3@example.com",
       "password": "gamma"
+    },
+    {
+      "username": "Saul Hudson",
+      "password": "lespaul" 
     }
-]
+    ]
   

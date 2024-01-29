@@ -20,6 +20,7 @@ router.post('/signup', async (req, res) => {
         req.session.logged_in = true;
 
         req.session.save(() => {
+            req.session.username = newUser.username;
             // The session has been saved, and now redirect the user
             res.redirect('/dashboard');
         });
