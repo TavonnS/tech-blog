@@ -1,19 +1,19 @@
 [
   {
     "text": "Great post! I really enjoyed reading it.",
-    "author": "user1",
+    "author": "1",
     "id": 1,
     "postParent": 1
   },
   {
     "text": "Interesting insights. Looking forward to more!",
-    "author": "user2",
+    "author": "2",
     "id": 2,
     "postParent": 1
   },
   {
     "text": "Well written. Thanks for sharing!",
-    "author": "user3",
+    "author": "1",
     "id": 3,
     "postParent": 1
   }
