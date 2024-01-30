@@ -1,26 +1,46 @@
-<main>
-    <article>
-        {{#if logged_in}}
-            {{#if isCreator}}
-                <a href="/posts/delete/{{post.id}}">Delete Post</a>
-            {{/if}}
-            {{#if isCreator}}
-                <a href="/posts/edit/{{post.id}}">Edit Post</a>
-            {{/if}}
-        {{/if}}
-        <h1>{{post.title}}</h1>
-        <p>{{{post.contents}}}</p>
-        <p>Creator: {{post.username}}</p>
-        <p>Date Created: {{post.dateCreated}}</p>
-        
-    </article>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Posts</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
 
-    <!-- Comment form -->
-    {{#if loggedIn}}
-        <form action="/comments" method="post">
-            <input type="hidden" name="postId" value="{{post.id}}">
-            <textarea name="commentText" placeholder="Leave a comment"></textarea>
-            <button type="submit">Submit Comment</button>
-        </form>
+<body>
+    
+<h1>Can you see this?</h1>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>Created by: {{ post.creator }}</p>
+    <p>Date created: {{ post.createdAt.toDateString }}</p>
+
+    {{#if logged_in}}
+        {{#if isCreator}}
+                <a href="/posts/delete/{{post.id}}">Delete Post</a>
+        {{/if}}
+        {{#if isCreator}}
+                <a href="/posts/edit/{{post.id}}">Edit Post</a>
+        {{/if}}
     {{/if}}
-</main>
+     
+
+    <h2>Comments</h2>
+        <ul>
+            {{#each comments}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    {{#if loggedIn}}
+        <p>Welcome, {{ username }}!</p>
+        <!-- Add logic for comment form or any other user-specific features -->
+        <form>
+            <label for="comment">Leave a comment:</label>
+            <textarea id="comment" name="comment"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    {{else}}
+        <p>Please log in to leave a comment.</p>
+    {{/if}}
+
+    </body>
+
+</html>

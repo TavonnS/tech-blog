@@ -63,8 +63,9 @@ app.use('/', homeRoutes);
 app.post('/login', logRoutes);
 app.post('/signup', signupRoutes);
 app.use('/dashboard', homeRoutes);
-app.use('/posts', homeRoutes);
 app.post('/comments', homeRoutes);
+app.use('/viewPost', homeRoutes);
+app.post('/posts/new', homeRoutes);
 
 
 sequelize.sync({ force: false }).then(() => {

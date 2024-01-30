@@ -4,7 +4,8 @@ const isAuthenticated = require('../middleware/isAuth.js');
 const sequelize = require('../config/connection.js');
 
 const User = require('../models/User.js');
-const Post = require('../models/post.js');
+const Post = require('../models/Post.js');
+const viewPost = require('../public/js/editPost.js');
 
 router.get('/', async (req, res) => {
     try {
@@ -79,26 +80,51 @@ router.get('/login', (req, res) => {
     }
 });
 
-// Example route for viewing a blog post
-router.get("/posts/:postId", isAuthenticated, async (req, res) => {
-  try {
-      const postId = req.params.postId;
-      // Fetch the blog post details from the database based on the postId
 
-      // For example, assuming you have a Post model
-      const post = await Post.findByPk(postId);
+router.get('/posts/:postId', isAuthenticated, viewPost, async (req, res) => {
+    try {
+        const postId = req.params.postId;
+        // Fetch the blog post details from the database based on the postId
 
-      // Render a view with post details
-      res.render('viewPost', {
-          post,
-          loggedIn: req.session.loggedIn,
-          username: req.session.username
-      });
-  } catch (error) {
+        // For example, assuming you have a Post model
+        const post = await Post.findByPk(postId);
+
+        // Render a view with post details
+        res.render('viewPost', {
+            post,
+            logged_in: req.session.logged_in,
+            username: req.session.username
+        });
+    } catch (error) { 
       console.error(error);
       res.status(500).send("Internal Server Error");
+
+    }
+});
+
+router.post('/posts/new', isAuthenticated, async (req, res) => {
+  try {
+      const { postTitle, postContent } = req.body; // Assuming you named your form fields postTitle and postContent
+
+      // Get the logged-in user's username or user ID from the session
+      const author = req.session.user.id; // Adjust accordingly
+
+      // Create a new post in the database
+      const newPost = await Post.create({
+          title: postTitle,
+          content: postContent,
+          author: user.id, // Assuming you named your user ID field 'id'
+          // Add more fields as needed
+      });
+
+      // Redirect to the newly created post's page
+      res.redirect(`/posts/${newPost.id}`);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
   }
 });
+
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
