@@ -13,6 +13,7 @@ router.post('/login', async (req, res) => {
         const userData = await User.findOne({
           where: { username: req.body.username },
         });
+        console.log(userData); // added this line
 
         if (!userData) {
             return res.status(400).json({ message: 'Incorrect username or password, please try again' });
@@ -33,6 +34,7 @@ router.post('/login', async (req, res) => {
         // Wait for req.session.save() to complete before responding
         
         req.session.save(() => {
+          console.log(req, res)
           req.session.username = userData.username;  // added this line
           res.redirect('/dashboard');
         

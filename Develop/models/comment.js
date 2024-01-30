@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const User = require('./User');
+const User = require('./user');
 const Post = require('./Post');
 
 class Comment extends Model {}
@@ -19,11 +19,11 @@ Comment.init(
       allowNull: false,
     },
     author: {
-      type: DataTypes.STRING, // Change this to the data type of the 'username' field in the User model
+      type: DataTypes.INTEGER, // Change this to the data type of the 'username' field in the User model
       allowNull: false,
       references: {
-        model: 'User', // Assuming 'User' is the name of your User model
-        key: 'username', // Assuming 'username' is the primary key in the User model
+        model: User, // Assuming 'User' is the name of your User model
+        key: 'id', // Assuming 'id' is the primary key in the User model
       },
     },
     createdAt: {
@@ -34,16 +34,15 @@ Comment.init(
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
-  
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
-    postId: {
+    postParent: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      defaultValue: DataTypes.NOW, // ?
       references: {
-        model: 'Posts', // Assuming 'Posts' is the name of your Posts model
-        key: 'id', // Assuming 'id' is the primary key in the Posts model
+        model: Post, // Assuming 'Post' is the name of your Posts model
+        key: 'id', 
       },
     },
   },
@@ -55,9 +54,7 @@ Comment.init(
   }
 );
 
-
-Comment.belongsTo(User, { foreignKey: 'authorId', targetKey: 'id' });
-Comment.belongsTo(Post, { foreignKey: 'postId', targetKey: 'id' });
-
+Comment.belongsTo(User, { foreignKey: 'author', targetKey: 'id' });
+Comment.belongsTo(Post, { foreignKey: 'postParent', targetKey: 'id' })
 
 module.exports = Comment;

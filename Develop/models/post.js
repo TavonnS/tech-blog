@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const User = require('./User');
+const User = require('./user');
 
 class Post extends Model {}
 
@@ -27,11 +27,11 @@ Post.init(
       defaultValue: DataTypes.NOW,
     },
     author: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'User', // Assuming 'User' is the name of your User model
-        key: 'username', // Assuming 'id' is the primary key in the User model        
+        model: User, // Assuming 'User' is the name of your User model
+        key: 'id', // Assuming 'id' is the primary key in the User model        
       },
     },
   },
@@ -43,6 +43,7 @@ Post.init(
   }
 );
 
-Post.belongsTo(User, { foreignKey: 'author', targetKey: 'id' });
+Post.belongsTo(User, { foreignKey: 'author', targetKey: 'id' }); // Use 'username' as the targetKey
+
 
 module.exports = Post;
