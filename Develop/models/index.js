@@ -2,13 +2,13 @@ const sequelize = require('../config/connection');
 const { Model, DataTypes } = require('sequelize');
 
 const User = require('./user');
-const Post = require('./Post');
-const Comment = require('./comment');
+const Post = require('./post');
+const Comment = require('./Comment');
+
 
 Post.belongsTo(User, {
     foreignKey: 'author',
     onDelete: 'CASCADE',
-    targetKey: 'id'
 });
 
 User.hasMany(Post, {
@@ -17,11 +17,11 @@ User.hasMany(Post, {
 });
 
 Post.hasMany(Comment, {
-    foreignKey: 'postParent',
+    foreignKey: 'post',
     onDelete: 'CASCADE'
 });
 Comment.belongsTo(Post, {
-    foreignKey: 'postParent',
+    foreignKey: 'post',
     onDelete: 'CASCADE'
 });
 User.hasMany(Comment, {

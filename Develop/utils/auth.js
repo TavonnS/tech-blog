@@ -1,5 +1,5 @@
 // Middleware function to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
+const withAuth = (req, res, next) => {
     // If user is logged in, continue to the next middleware or route handler
     if (!req.session.logged_in) {
       res.redirect('/login');
@@ -7,4 +7,4 @@ const isAuthenticated = (req, res, next) => {
       next();
     }};
 
-module.exports = isAuthenticated;
+module.exports = withAuth;

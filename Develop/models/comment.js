@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 const User = require('./user');
-const Post = require('./Post');
+const Post = require('./post');
 
 class Comment extends Model {}
 
@@ -19,11 +19,11 @@ Comment.init(
       allowNull: false,
     },
     author: {
-      type: DataTypes.INTEGER, // Change this to the data type of the 'username' field in the User model
+      type: DataTypes.STRING, 
       allowNull: false,
       references: {
-        model: User, // Assuming 'User' is the name of your User model
-        key: 'id', // Assuming 'id' is the primary key in the User model
+        model: "User", 
+        key: 'username', 
       },
     },
     createdAt: {
@@ -36,13 +36,12 @@ Comment.init(
       allowNull: false,
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
-    postParent: {
-      type: DataTypes.INTEGER,
+    post: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: DataTypes.NOW, // ?
       references: {
-        model: Post, // Assuming 'Post' is the name of your Posts model
-        key: 'id', 
+        model: "Posts", 
+        key: 'title', 
       },
     },
   },
@@ -53,8 +52,5 @@ Comment.init(
     tableName: 'Comments', // Ensure the table name is specified here
   }
 );
-
-Comment.belongsTo(User, { foreignKey: 'author', targetKey: 'id' });
-Comment.belongsTo(Post, { foreignKey: 'postParent', targetKey: 'id' })
 
 module.exports = Comment;

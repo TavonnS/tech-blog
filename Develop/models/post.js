@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const User = require('./User');
+const User = require('./user');
 
 class Post extends Model {}
 
@@ -16,10 +16,11 @@ Post.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     content: {
       type: DataTypes.TEXT,
-      allowNull: true, // Adjust this based on your requirements
+      allowNull: false, 
     },
     dateCreated: {
       type: DataTypes.DATE,
@@ -27,23 +28,27 @@ Post.init(
       defaultValue: DataTypes.NOW,
     },
     author: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: User, // Assuming 'User' is the name of your User model
-        key: 'id', // Assuming 'id' is the primary key in the User model        
+        model: "User",
+        key: 'username', 
       },
     },
   },
   {
     sequelize,
-    timestamps: true, // Adjust this based on your requirements
+    timestamps: true, 
     modelName: 'Post',
-    tableName: 'Posts', // Ensure the table name is specified here
+    tableName: 'Posts', 
+    indexes: [
+      {
+        unique: true,
+        fields: ['title'],
+      },
+    ],
   }
 );
-
-Post.belongsTo(User, { foreignKey: 'author', targetKey: 'id' }); // Use 'username' as the targetKey
 
 
 module.exports = Post;

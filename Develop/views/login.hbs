@@ -1,25 +1,40 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Login</h2>
 
-            <h2>LOGIN</h2>
-            <form id="login" action="/login" method="post">
+    <form class="form login-form">
+      <div class="form-group">
+        <label for="username-login">username:</label>
+        <input class="form-input" type="text" id="username-login" />
+      </div>
+      <div class="form-group">
+        <label for="password-login">password:</label>
+        <input class="form-input" type="password" id="password-login" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">login</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h2>Signup</h2>
 
-                <label for="loginUsername">Username:</label>
-                <input type="username" id="loginUsername" name="loginUsername" required>
-                
-                <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" name="loginPW" required>
-                
-                <button id="logbtn" type="submit">LOGIN</button>
-            </form>
+    <form class="form signup-form">
+      <div class="form-group">
+        <label for="username-signup">name:</label>
+        <input class="form-input" type="text" id="username-signup" />
+      </div>
+     
+      <div class="form-group">
+        <label for="password-signup">password:</label>
+        <input class="form-input" type="password" id="password-signup" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">signup</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-            <h2>SIGN UP</h2>
-            <form id="signup" action="/signup" method="post">
 
-                <label for="signupUsername">Username:</label>
-                <input type="username" id="signupUsername" name="signupUsername" required>
-                
-                <label for="signupPassword">Password:</label>
-                <input type="password" id="signupPassword" name="signupPW" required>
-                
-                <button id="signupbtn" type="submit">SIGN UP</button>
-            </form>
-
+<script src="js/login.js"></script>

@@ -1,26 +1,21 @@
+const path = require('path');
 const express = require('express');
-const session = require('express-session'); // Session setup
+const session = require('express-session'); 
 const dotenv = require('dotenv');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const exphbs = require('express-handlebars');
-const isAuthenticated = require('./middleware/isAuth.js');
+const withAuth = require('./utils/auth');
+const routes = require('./controllers');
+
 
 dotenv.config();
-
-const homeRoutes = require('./routes/homeRoutes.js');
-const logRoutes = require('./routes/login.js');
-const signupRoutes = require('./routes/signup.js');
-
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-const path = require('path');
 
 
 // Handlebars setup
@@ -34,7 +29,7 @@ const hbs = exphbs.create({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Handlebars setup
+// Handlebars engine setup
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -54,19 +49,7 @@ const sess = {
 };
 
 app.use(session(sess));
-
-
-
-
-
-app.use('/', homeRoutes);
-app.post('/login', logRoutes);
-app.post('/signup', signupRoutes);
-app.use('/dashboard', homeRoutes);
-app.post('/comments', homeRoutes);
-app.use('/viewPost', homeRoutes);
-app.post('/posts/new', homeRoutes);
-
+app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));

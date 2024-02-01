@@ -1,26 +1,13 @@
-    {{#if posts.length}}
-        <h2>All Blog Posts for this Forum</h2>
+{{#if posts}}
+  {{#each posts}}
+    <div class="post">
+      <h2>{{title}}</h2>
+      <p>{{content}}</p>
+      <p>{{author}}</p>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No posts found</p>
+{{/if}}
 
-        {{#if logged_in}}
-        <ul>
-            {{#each posts}}
-                <li>
-                    <a href="/posts/{{id}}">{{title}}</a>
-                    <h3>{{title}}</h3>
-                    <p>{{dateCreated}}</p>
-                </li>
-            {{/each}}
-        </ul>
-        {{else}}
-         <ul>
-            {{#each posts}}
-                <li>
-                    <h3>{{title}}</h3>
-                    <p>{{dateCreated}}</p>
-                </li>
-            {{/each}}
-        </ul>
-        {{/if}}
-    {{else}}
-        <p>No blog posts available here!</p>
-    {{/if}}
+

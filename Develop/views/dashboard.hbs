@@ -1,34 +1,56 @@
-{{#if logged_in}}
-    {{#if posts.length}}
-        <h2>Latest Blog Posts</h2>
-        <ul>
-            {{#each posts}}
-                <li>
-                    <a href="/posts/{{id}}">{{title}}</a>
-                    <h3>{{dataValues.author}}</h3>
-                    <h3>{{dataValues.title}}</h3>
-                    <p>{{dataValues.content}}</p>
-                </li>
-            {{/each}}
-        </ul>
-    {{else}}
-        <p>No blog posts available, but you are logged in.</p>
-    {{/if}}
 
-    <h2>Create a New Blog Post</h2>
-    <form action="/posts/new" method="POST">
-        <!-- Add form fields as needed -->
-        <label for="postTitle">Title:</label>
-        <input type="text" id="postTitle" name="postTitle" required>
+    <h2>Welcome, {{username}}!</h2>
+    
 
-        <label for="postContent">Content:</label>
-        <textarea id="postContent" name="postContent" required></textarea>
+<div>
+    <h3>Create a New Post:</h3>
 
-        <!-- Add more form fields as needed -->
+    <form action="/posts" method="post" class="create post">
 
-        <button type="submit">Submit</button>
+      <div class="form-group">
+        <label for="post-name">post title:</label>
+        <input class="form-input" type="text" id="post-name" name="post-name" />
+      </div>
+
+      <div class="form-group">
+        <label for="post-content">content!:</label>
+        <textarea class="form-input" id="post-content" name="post-content"></textarea>
+      </div>
+
+      <div>
+        <label for="post-author">author(use your username):</label>
+        <input class="form-input" type="text" id="post-author" name="post-author" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Post</button>
+      </div>
+
     </form>
+  </div>
 
-{{else}}
-    <p>You are not logged in!</p>
-{{/if}}
+  {{#if posts}}  // is it post or posts?
+ 
+    <h3>Current Posts:</h3>
+
+    <div class="post-list">
+    {{#each posts}}
+      <div class="post">
+        <h4>{{title}}</h4>
+        <p>{{content}}</p>
+      </div>
+
+      <div>
+        <button data-id="{{post.id}}" class="btn btn-sm btn-danger">EDIT</button>
+        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+      </div>
+    
+    {{/each}}
+  </div>
+  
+  {{else}}
+    <p>No posts yet!</p>
+  {{/if}}
+
+
+<script src="/js/dashboard.js"></script> 

@@ -2,21 +2,21 @@
   {
     "title": "First Post",
     "content": "This is the content of the first post.",
-    "author": "1"
+    "author": "user1"
   },
   {
     "title": "Second Post",
     "content": "This is the content of the second post.",
-    "author": "1"
+    "author": "user2"
   },
   {
     "title": "Third Post",
     "content": "This is the content of the third post.",
-    "author": "3"
+    "author": "user3"
   }, 
   {
     "title": "Saul's Post",
     "content": "This is a really good Les Paul, very sustained tone and low end gain. The mid spectrum is hollowed out.",
-    "author": "2"
+    "author": "Saul Hudson"
   }
 ]
