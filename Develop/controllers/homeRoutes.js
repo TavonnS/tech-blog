@@ -41,8 +41,8 @@ router.get('/posts/:id', withAuth, async (req, res) => {
       const postData = await Post.findByPk(req.params.id, {
         include: [
           {
-            model: User,
-            attributes: ['username'],
+            model: User
+            // attributes: ['username'],
           },
         ],
       });
@@ -51,7 +51,7 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 
       res.render('viewPost', { 
         ...post,
-        logged_in: req.session.logged_in,
+        // logged_in: req.session.logged_in,
         // username: req.session.username  // if needed
       });
     } catch (err) {
