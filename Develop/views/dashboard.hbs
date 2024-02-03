@@ -1,11 +1,11 @@
-
+<div id="dashboard">
     <h2>Welcome, {{username}}!</h2>
     
 
-<div>
+<section>
     <h3>Create a New Post:</h3>
 
-    <form action="/posts" method="post" class="create post">
+    <form action="/api/posts" method="post" class="create post">
 
       <div class="form-group">
         <label for="post-name">post title:</label>
@@ -17,32 +17,29 @@
         <textarea class="form-input" id="post-content" name="post-content"></textarea>
       </div>
 
-      <div>
-        <label for="post-author">author(use your username):</label>
-        <input class="form-input" type="text" id="post-author" name="post-author" />
-      </div>
-
-      <div class="form-group">
+     <div class="form-group">
         <button type="submit" class="btn btn-primary">Create Post</button>
       </div>
 
     </form>
-  </div>
+  </section>
 
-  {{#if posts}}  // is it post or posts?
+
+  {{#if logged_in}}
+  {{#if posts}}  
  
-    <h3>Current Posts:</h3>
+    <h3>Your Posts:</h3>
 
-    <div class="post-list">
+   <div class="post-list">
     {{#each posts}}
       <div class="post">
-        <h4>{{title}}</h4>
+        <h4>{{this.title}}</h4>
         <p>{{content}}</p>
       </div>
 
       <div>
-        <button data-id="{{post.id}}" class="btn btn-sm btn-danger">EDIT</button>
-        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+        <button id="edit">EDIT</button>
+        <button id="delete">DELETE</button>
       </div>
     
     {{/each}}
@@ -51,6 +48,7 @@
   {{else}}
     <p>No posts yet!</p>
   {{/if}}
+{{/if}}
 
-
+</div>
 <script src="/js/dashboard.js"></script> 

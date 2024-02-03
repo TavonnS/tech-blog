@@ -9,12 +9,13 @@
 <body>
 
 <header>
-
+    <div>
     <h1>My Tech Blog</h1>
-    {{#if logged_in }}
-    <p>Welcome, {{username}}!</p>
+    {{#if logged_in}}
+        <p>Welcome! You are logged in as {{session.username}}</p>
     {{/if}}
-
+    </div>
+    <div>
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
@@ -22,7 +23,7 @@
             <li>
 
                 {{#if logged_in}}
-                    <a id="logout" action="POST" href="/api/users/logout">Logout</a>
+                    <a id="logout" href="/logout">Logout</a>
                 {{else}}
                     <a href="/login">Login</a>
                 {{/if}}
@@ -30,12 +31,12 @@
             </li>
         </ul>
     </nav>
-
+</div>
 </header>
 
 {{{body}}}
 
 
-<script src="./js/logout.js"></script>
+{{!-- <script src="./js/logout.js"></script> --}}
 </body>
 </html>

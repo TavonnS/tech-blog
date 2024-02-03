@@ -1,43 +1,35 @@
-const Post = require('../../models/Post');
-
-
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('.create.post');
+  const form = document.querySelector('.create.post');
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
 
-      const postTitle = document.getElementById('post-name').value;
-      const postContent = document.getElementById('post-content').value;
-      const postAuthor = document.getElementById('post-author').value;     
+    const title = document.querySelector('#post-name').value;
+    const content = document.querySelector('#post-content').value;
 
-      const postData = {
-        title: postTitle,
-        content: postContent,
-        author: postAuthor, 
-      };
+    // Assuming you have stored the username in a session variable on the server-side
+    const author = sessionStorage.getItem('username'); // Use sessionStorage or localStorage based on your application requirements
 
-      fetch('/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          // Handle the response from the server, e.g., show a success message
-          console.log('Post created successfully:', data);
-        })
-        .catch(error => {
-          // Handle errors, e.g., show an error message
-          console.error('Error creating post:', error.message);
-        });
-    });
+    fetch('/api/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: title,
+        content: content,
+        author: author
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log(response);
+      if (response.ok) {
+        document.location.replace('/dashboard');
+      } else {
+        console.log(response.statusText);
+        alert('Failed to create post');
+      }
+    })
+    .catch(err => console.log(err));
   });
-
+});

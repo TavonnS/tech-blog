@@ -1,28 +1,30 @@
 <div class="text-center">
-  <h2>{{title}}</h2>
-  <p>{{content}}</p>
-  <p>Created by {{author}} on {{dateCreated}}</p>
+    <h2>{{title}}</h2>
+    <p>{{content}}</p>
+    <p>Created by {{author}} on {{dateCreated}}</p>
 
-  <p>
-    <button class="btn btn-primary">Leave a Comment!</button>
-  </p>
+    <p>
+        <button id="comment">Leave a Comment!</button>
+    </p>
 </div>
 
-{{!-- 
-    <h2>Comments</h2>
-        <ul>
-            {{#each comments}}
-                <li>{{this}}</li>
-            {{/each}}
-        </ul>
-    {{#if loggedIn}}
-        <p>Welcome, {{ username }}!</p>
-        <!-- Add logic for comment form or any other user-specific features -->
-        <form>
-            <label for="comment">Leave a comment:</label>
-            <textarea id="comment" name="comment"></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    {{else}}
-        <p>Please log in to leave a comment.</p>
-    {{/if}} --}}
+
+<h2>Comments</h2>
+
+<ul>
+    {{#each comments}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+
+{{#if logged_in}}
+
+<form id="comment">
+    <label for="comment">Leave a comment:</label>
+    <textarea id="comment" name="comment"></textarea>
+    <button type="submit">Submit</button>
+</form>
+
+{{else}}
+<p>Please log in to leave a comment.</p>
+{{/if}}
