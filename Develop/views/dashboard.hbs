@@ -5,16 +5,21 @@
 <section>
     <h3>Create a New Post:</h3>
 
-    <form action="/api/posts" method="post" class="create post">
+    <form action="/api/posts" method="post" class="create-post">
 
       <div class="form-group">
-        <label for="post-name">post title:</label>
+        <label for="post-name">Title:</label>
         <input class="form-input" type="text" id="post-name" name="post-name" />
       </div>
 
       <div class="form-group">
-        <label for="post-content">content!:</label>
+        <label for="post-content">Content:</label>
         <textarea class="form-input" id="post-content" name="post-content"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="post-author">Author: (just enter your username)</label>
+        <input class="form-input" id="post-author" name="post-author" />
       </div>
 
      <div class="form-group">
@@ -25,15 +30,14 @@
   </section>
 
 
-  {{#if logged_in}}
-  {{#if posts}}  
+  {{#if posts.length}}  
  
     <h3>Your Posts:</h3>
 
    <div class="post-list">
     {{#each posts}}
       <div class="post">
-        <h4>{{this.title}}</h4>
+        <h4>{{posts.title}}</h4>
         <p>{{content}}</p>
       </div>
 
@@ -48,7 +52,6 @@
   {{else}}
     <p>No posts yet!</p>
   {{/if}}
-{{/if}}
 
 </div>
-<script src="/js/dashboard.js"></script> 
+<script src="./js/dashboard.js"></script> 

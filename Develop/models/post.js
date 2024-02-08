@@ -16,7 +16,6 @@ Post.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     content: {
       type: DataTypes.TEXT,
@@ -30,10 +29,6 @@ Post.init(
     author: {
       type: DataTypes.STRING,
       defaultValue: 'Anonymous',
-      // references: {
-      //   model: "User",
-      //   key: 'username', 
-      // },
     },
   },
   {
@@ -41,12 +36,6 @@ Post.init(
     timestamps: true, 
     modelName: 'Post',
     tableName: 'Posts', 
-    // indexes: [
-    //   {
-    //     unique: true,
-    //     fields: ['title'],
-    //   },
-    // ],
   }
 );
 

@@ -7,7 +7,7 @@ const withAuth = require("../utils/auth");
 
 
 router.get("/", async (req, res) => {
-  console.log(req.session.username);
+  console.log(res.body);
   try {
     const postData = await Post.findAll();
 
@@ -25,63 +25,43 @@ router.get("/", async (req, res) => {
 
 
 router.get("/posts/:id", withAuth, async (req, res) => {
+  console.log(req.params.id, res.body);
   try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: all,
-        },
-        {
-            model: Comment,
-            attributes: all,
-        },
-      ],
-    
-    });
+    const postData = await Post.findByPk(req.params.id);
+
+    if(!postData) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
+    }
 
     const post = postData.get({ plain: true });
 
     res.render("post", {
       ...post,
-      logged_in: req.session.logged_in,
-      username: req.session.username  // if needed
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 router.get("/dashboard", withAuth, async (req, res) => {
+  
+  const user = await User.findByPk(req.session.user_id, { attributes: { exclude: ["password"] } });
+  console.log(user);
+  const postData = await Post.findAll({ where: { author: user.username } });
+  console.log(postData);
+  const posts = postData.map((post) => post.get({ plain: true }));
+  console.log(posts);
   try {
-    // find the logged in user based on the session username
-    const userData = await User.findByPk(req.session.user_id, {
-      // user_id is needed
-      attributes: { exclude: ["password"] },
-      include: [{ model: Post }],
-    });
-
-    const postData = await Post.findAll({
-      where: {
-        id: req.session.id,
-      },
-    });
-
-    console.log(postData);
-
-    const user = userData.get({ plain: true });
-    const posts = postData.map((post) => post.get({ plain: true }));
-
-    console.log(posts);
-
-    res.render("dashboard", {
-      ...posts,
-      ...user,
-      logged_in: true,
-    });
-  } catch (err) {
-    res.status(500).json(err);
+    res.render('dashboard', { ...posts });
+  } 
+  
+  
+  catch (err) {
+    console.error(err);
   }
+
 });
 
 router.get("/login", (req, res) => {
@@ -92,6 +72,7 @@ router.get("/login", (req, res) => {
   }
   res.render("login");
 });
+
 
 router.get("/logout", (req, res) => {
   console.log({ req, res });
