@@ -56,5 +56,3 @@ User.init(
 );
 
 module.exports = User;
-
-// changing the bcrypt stuff

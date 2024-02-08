@@ -29,11 +29,11 @@ Post.init(
     },
     author: {
       type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: "User",
-        key: 'username', 
-      },
+      defaultValue: 'Anonymous',
+      // references: {
+      //   model: "User",
+      //   key: 'username', 
+      // },
     },
   },
   {
@@ -41,12 +41,12 @@ Post.init(
     timestamps: true, 
     modelName: 'Post',
     tableName: 'Posts', 
-    indexes: [
-      {
-        unique: true,
-        fields: ['title'],
-      },
-    ],
+    // indexes: [
+    //   {
+    //     unique: true,
+    //     fields: ['title'],
+    //   },
+    // ],
   }
 );
 
