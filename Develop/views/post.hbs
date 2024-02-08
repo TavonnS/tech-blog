@@ -1,34 +1,37 @@
+<div id="post template">
+
+
 <div id="post">
-
-<div class="text-center">
-    <h2>{{title}}</h2>
-    <p>{{content}}</p>
-    <p>Created by {{author}} on {{dateCreated}}</p>
-
-    
-    <button id="comment">Leave a Comment!</button>
-    
+  <h2>{{title}}</h2>
+  <p>{{content}}</p>
+  <p>Created by {{author}} on {{dateCreated}}</p>
 </div>
 
-
-<h2>Comments</h2>
-
-<ul>
+<!-- Display comments -->
+<div id="comments">
+  <h3>Comments</h3>
+  <ul>
     {{#each comments}}
     <li>{{this}}</li>
     {{/each}}
-</ul>
+  </ul>
+</div>
 
+<!-- Display comment form if user is logged in -->
 {{#if logged_in}}
-
-<form id="comment">
-    <label for="comment">Leave a comment:</label>
-    <textarea id="comment" name="comment"></textarea>
+<div id="comment-form">
+  <h3>Add a Comment</h3>
+  <form action="/comment" method="POST">
+    <input type="hidden" name="post_id" value="{{id}}">
+    <textarea name="comment" placeholder="Enter your comment"></textarea>
     <button type="submit">Submit</button>
-</form>
-
+  </form>
+</div>
 {{else}}
-<p>Please log in to leave a comment.</p>
+<!-- Display login message if user is not logged in -->
+<div id="login-message">
+  <p>Please log in to leave a comment.</p>
+</div>
 {{/if}}
 
 </div>

@@ -6,55 +6,61 @@ const { User, Post } = require("../models");
 const withAuth = require("../utils/auth");
 
 
-router.get("/", async (req, res) => {
-  console.log(res.body);
+router.get("/", withAuth, async (req, res) => {
+  
   try {
+
+    const userData = await User.findByPk(req.session.user_id, { attributes: { exclude: ["password"] } });
+
     const postData = await Post.findAll();
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
+
     res.render("homepage", {
       posts, 
       logged_in: req.session.logged_in, 
-      username: req.session.username 
+      username: userData.username 
     });
   } catch (err) {
-    res.status(500).json(err);
+console.error(err);
   }
 });
 
 
 router.get("/posts/:id", withAuth, async (req, res) => {
-  console.log(req.params.id, res.body);
+  console.log(req, res);
   try {
-    const postData = await Post.findByPk(req.params.id);
-
-    if(!postData) {
-      res.status(404).json({ message: "No post found with this id!" });
-      return;
-    }
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+      ],
+    });
+      
 
     const post = postData.get({ plain: true });
 
-    res.render("post", {
+    res.render("post", { 
       ...post,
+      logged_in: req.session.logged_in,
+      username: req.session.username,
     });
 
-  } catch (err) {
-    res.status(500).json(err);
+} catch (err) {
+    console.error(err);
   }
 });
 
 router.get("/dashboard", withAuth, async (req, res) => {
   
   const user = await User.findByPk(req.session.user_id, { attributes: { exclude: ["password"] } });
-  console.log(user);
   const postData = await Post.findAll({ where: { author: user.username } });
-  console.log(postData);
   const posts = postData.map((post) => post.get({ plain: true }));
-  console.log(posts);
   try {
-    res.render('dashboard', { ...posts });
+    res.render('dashboard', { posts, logged_in: req.session.logged_in, username: user.username });
   } 
   
   

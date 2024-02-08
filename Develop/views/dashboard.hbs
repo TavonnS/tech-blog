@@ -37,13 +37,20 @@
    <div class="post-list">
     {{#each posts}}
       <div class="post">
-        <h4>{{posts.title}}</h4>
+        <h4>{{title}}</h4>
         <p>{{content}}</p>
       </div>
 
       <div>
-        <button id="edit">EDIT</button>
-        <button id="delete">DELETE</button>
+
+        <button id="edit">
+          <a action="put" href="/api/posts/{{id}}">EDIT</a>  // or maybe go to post.hbs page?
+          </button>
+
+        <button id="delete">
+          <a action="delete" href="/api/posts/{{id}}">DELETE</a>
+          </button>
+
       </div>
     
     {{/each}}
@@ -54,4 +61,5 @@
   {{/if}}
 
 </div>
-<script src="./js/dashboard.js"></script> 
+<script src="./js/dashboard.js"></script>
+<script src="./js/delete.js"></script>
