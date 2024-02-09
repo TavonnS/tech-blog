@@ -6,8 +6,8 @@ This is a blogging site coded using a Model-View-Controller structure, featuring
 
 ## Link
 
-[LINK](https:///)
+[LINK](https://dry-river-45552-65f9dd09dfff.herokuapp.com/login)
 
 ## Screen
 
-![](./Develop/public/images/techblog.png)
+![](./public/images/techblog.png)
