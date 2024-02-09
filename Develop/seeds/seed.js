@@ -3,10 +3,7 @@ const { User, Post } = require('../models');
 
 const userData = require('./userData.json');
 const postData = require('./postData.json');
-<<<<<<< HEAD
 // const commentData = require('./commentData.json');
-=======
->>>>>>> 7052fef9891bbcbd9790fb9fdb6d71ab96dc5828
 
 
 const seedDatabase = async () => {
@@ -23,13 +20,10 @@ const seedDatabase = async () => {
     await Post.bulkCreate(postData);
     console.log('Posts seeded successfully');
 
-<<<<<<< HEAD
     // console.log('Seeding comments...');
     // await Comment.bulkCreate(commentData);
     // console.log('Comments seeded successfully');
 
-=======
->>>>>>> 7052fef9891bbcbd9790fb9fdb6d71ab96dc5828
     console.log('Database seeded successfully');
     process.exit(0);
     

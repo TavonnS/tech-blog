@@ -3,7 +3,6 @@ const { Model, DataTypes } = require('sequelize');
 
 const User = require('./user');
 const Post = require('./post');
-<<<<<<< HEAD
 // const Comment = require('./Comment');
 
 
@@ -31,9 +30,4 @@ const Post = require('./post');
 // });
 
 
-=======
-
-
-
->>>>>>> 7052fef9891bbcbd9790fb9fdb6d71ab96dc5828
 module.exports = { User, Post };
