@@ -1,13 +1,13 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "blog app",
   "main": "./Develop/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd Develop && node server.js",
-    "seed": "node seeds/seed.js",
-    "dev": "nodemon server.js"
+    "seed": "cd Develop && node seeds/seed.js",
+    "dev": "cd Develop && nodemon server.js"
   },
   "author": "",
   "license": "ISC",
