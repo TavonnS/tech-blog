@@ -30,25 +30,13 @@ console.error(err);
 
 router.get("/posts/:id", withAuth, async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
-    });
-      
-    const userID = req.session.user_id;
-    const user = await User.findByPk(userID, { attributes: { exclude: ["password"] } });
+    const postData = await Post.findByPk(req.params.id);
     const post = postData.get({ plain: true });
+    const userData = req.session.user_id;
+    const user = await User.findByPk(userData, { attributes: { exclude: ["password"] } });
 
-   
-    res.render("post", { 
-      ...post,
-      logged_in: req.session.logged_in,
-      username: user.username,
-    });
+
+    res.render("post", { ...post, logged_in: req.session.logged_in, username: user.username });
 
 } catch (err) {
     console.error(err);
