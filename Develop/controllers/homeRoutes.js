@@ -29,7 +29,6 @@ console.error(err);
 
 
 router.get("/posts/:id", withAuth, async (req, res) => {
-  console.log(req, res);
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -40,19 +39,22 @@ router.get("/posts/:id", withAuth, async (req, res) => {
       ],
     });
       
-
+    const userID = req.session.user_id;
+    const user = await User.findByPk(userID, { attributes: { exclude: ["password"] } });
     const post = postData.get({ plain: true });
 
+   
     res.render("post", { 
       ...post,
       logged_in: req.session.logged_in,
-      username: req.session.username,
+      username: user.username,
     });
 
 } catch (err) {
     console.error(err);
   }
 });
+
 
 router.get("/dashboard", withAuth, async (req, res) => {
   

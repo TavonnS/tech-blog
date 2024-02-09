@@ -132,3 +132,11 @@ body {
   color: #888;
   font-style: italic;
 }
+
+#edit-form-container {
+  display: none;
+}
+
+#edit-form-container.show {
+  display: block;
+}

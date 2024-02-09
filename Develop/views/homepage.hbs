@@ -1,14 +1,12 @@
 <div id="homepage">
 {{#if logged_in}}
-
-  <h2>Welcome, {{username}}!</h2>
-
 {{#if posts}}
   {{#each posts}}
     <div class="post">
       <h4>{{title}}</h4>
       <p>{{content}}</p>
       <p>{{author}}</p>
+      
       <a href="/posts/{{id}}">VIEW POST</a>
     </div>
   {{/each}}

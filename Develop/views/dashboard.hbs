@@ -1,7 +1,5 @@
 <div id="dashboard">
-    <h2>Welcome, {{username}}!</h2>
     
-
 <section>
     <h3>Create a New Post:</h3>
 
@@ -43,9 +41,28 @@
 
       <div>
 
-        <button id="edit">
-          <a action="put" href="/api/posts/{{id}}">EDIT</a>  // or maybe go to post.hbs page?
-          </button>
+          <button id="edit-button">EDIT</button>
+
+          <div id="edit-form-container">
+            <form>
+          
+            <label for="edit-name">Edit Title:</label>
+            <input id="edit-name" />
+
+            <label for="edit-content">Edit Content:</label>
+            <textarea  id="edit-content"></textarea>
+
+
+            <button id="update-button" action="put" href="/api/posts/{{id}}" type="submit">Update Post</button>
+
+
+          </form>
+
+
+            <button id="cancel">Cancel Edit</button>
+          
+          </div>
+    
 
         <button id="delete">
           <a action="delete" href="/api/posts/{{id}}">DELETE</a>
@@ -61,5 +78,6 @@
   {{/if}}
 
 </div>
+<script src="./js/edit.js"></script>
 <script src="./js/dashboard.js"></script>
 <script src="./js/delete.js"></script>
