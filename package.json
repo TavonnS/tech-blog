@@ -5,7 +5,7 @@
   "main": "./Develop/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "cd Develop && node server.js",
     "seed": "node seeds/seed.js",
     "dev": "nodemon server.js"
   },
