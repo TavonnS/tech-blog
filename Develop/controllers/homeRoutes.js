@@ -29,6 +29,7 @@ console.error(err);
 
 
 router.get("/posts/:id", withAuth, async (req, res) => {
+  console.log(req.body);
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
